@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+.headline {
+    margin: 0 20%;
+}
+
+.product-container {
+    margin: 1em 20%;
+    display: flex;
+    border-radius: 2em;
+    padding: 2em;
+    border: 1px solid black;
+}
+
+.product-price{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-buy {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
