@@ -1,0 +1,45 @@
+<h1>Order Details</h1>
+
+<h2>Order total: <%= @product.formatted_price %></h2>
+
+<hr />
+
+<%= form_with(url: product_purchase_path, method: "post") do %>
+    <div class="form-group">
+        <%= label_tag(:first_name, "First Name") %>
+        <%= text_field_tag(:first_name) %>
+    </div>
+    
+    <div class="form-group">
+        <%= label_tag(:last_name, "Last Name") %>
+        <%= text_field_tag(:last_name) %>
+    </div>
+
+    <div class="form-group">
+        <%= label_tag(:address_1, "Address Line 1") %>
+        <%= text_field_tag(:address_1) %>
+    </div>
+
+    <div class="form-group">
+        <%= label_tag(:address_1, "Address Line 2") %>
+        <%= text_field_tag(:address_1) %>
+    </div>
+
+    <div class="form-group">
+        <%= label_tag(:city, "City") %>
+        <%= text_field_tag(:city) %>
+    </div>
+
+    <div class="form-group">
+        <%= label_tag(:state, "State") %>
+        <%= text_field_tag(:state) %>
+    </div>
+
+    <div class="form-group">
+        <%= label_tag(:zip_code, "Zip") %>
+        <%= text_field_tag(:zip_code) %>
+    </div>
+
+    <%= submit_tag("Submit Order") %>
+<% end %>
+
