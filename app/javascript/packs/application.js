@@ -76,6 +76,10 @@ window.addEventListener('load', () => {
         // When ready, reenable the submit buttton
         window.Spreedly.on("ready", function () {
             spreedlySubmit.disabled = false;
+
+            const style = "width: 100%;  height: 44px; padding: 0px 20px; margin: 8px 0; box-sizing: border-box; border: 2px solid #ccc; border-radius: 4px;";
+            Spreedly.setStyle("number", style);
+            Spreedly.setStyle("cvv", style);
         });
     }
 });
