@@ -5,9 +5,9 @@ class ProductsController < ApplicationController
 
     def cart
         @product = Product.find(params.require(:id))
+        @env_token = Rails.application.credentials.spreedly[:env_key]
     end
 
     def purchase
-        binding.pry
     end 
 end

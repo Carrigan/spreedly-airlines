@@ -2,44 +2,49 @@
 
 <h2>Order total: <%= @product.formatted_price %></h2>
 
-<hr />
+<%= form_with(url: product_purchase_path, method: "post", id: "spreedly-form") do %>
+    <hr />
 
-<%= form_with(url: product_purchase_path, method: "post") do %>
-    <div class="form-group">
-        <%= label_tag(:first_name, "First Name") %>
-        <%= text_field_tag(:first_name) %>
-    </div>
-    
-    <div class="form-group">
-        <%= label_tag(:last_name, "Last Name") %>
-        <%= text_field_tag(:last_name) %>
+    <%= hidden_field_tag("spreedly_token") %>
+
+    <h3>Payment Info</h3>
+
+    <div id="spreedly_errors">
     </div>
 
-    <div class="form-group">
-        <%= label_tag(:address_1, "Address Line 1") %>
-        <%= text_field_tag(:address_1) %>
+    <div id="spreedly_success">
+        You are using the <span id="spreedly_card_type"></span> card ending in <span id="spreedly_card_truncated"></span>.
     </div>
 
-    <div class="form-group">
-        <%= label_tag(:address_1, "Address Line 2") %>
-        <%= text_field_tag(:address_1) %>
+    <div id="spreedly_form">
+        <div class="form-group">
+            <%= label_tag(:spreedly_full_name, "Cardholder Name") %>
+            <%= text_field_tag(:spreedly_full_name) %>
+        </div>
+
+        <div class="form-group">
+            <label>Credit Card Number</label>
+            <div id="spreedly_number" style="width:225px; height:35px; border: 2px solid"></div>
+        </div>
+
+        <div class="form-group">
+            <%= label_tag(:spreedly_exp_month, "Expiration Date") %>
+            <%= text_field_tag(:spreedly_exp_month, "", maxlength: 2) %>
+            <%= text_field_tag(:spreedly_exp_year, "", maxlength: 4) %>
+        </div>
+
+        <div class="form-group">
+            <label>CVV</label>
+            <div id="spreedly_cvv" style="width:60px; height:35px; border: 2px solid "></div>
+        </div>
+
+        <%= button_tag("Add Payment Info", id: "spreedly_submit", disabled: true) %>
     </div>
 
-    <div class="form-group">
-        <%= label_tag(:city, "City") %>
-        <%= text_field_tag(:city) %>
-    </div>
+    <hr />
 
-    <div class="form-group">
-        <%= label_tag(:state, "State") %>
-        <%= text_field_tag(:state) %>
-    </div>
-
-    <div class="form-group">
-        <%= label_tag(:zip_code, "Zip") %>
-        <%= text_field_tag(:zip_code) %>
-    </div>
-
-    <%= submit_tag("Submit Order") %>
+    <%= submit_tag("Submit Order", id: "airlines-submit", disabled: true) %>
 <% end %>
+
+<%= spreedly_iframe_initializer(@env_token, "spreedly", "airlines-submit") %>
 
