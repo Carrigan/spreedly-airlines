@@ -1,5 +1,3 @@
-require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
@@ -40,6 +38,7 @@ window.addEventListener('load', () => {
             };
           
             window.Spreedly.tokenizeCreditCard(requiredFields);
+            return false;
         };
 
         // Initially hide the errors and successes
@@ -51,6 +50,7 @@ window.addEventListener('load', () => {
             // Hide the form div, show the success div with card info
             show(successDiv);
             hide(document.getElementById(`${prefix}_form`));
+            hide(errorDiv);
             document.getElementById(`${prefix}_card_type`).innerHTML = pmData.card_type;
             document.getElementById(`${prefix}_card_truncated`).innerHTML = pmData.last_four_digits;
 
@@ -60,6 +60,12 @@ window.addEventListener('load', () => {
 
             // Enable the submit button
             formSubmit.disabled = false;
+        });
+
+        // Display errors
+        Spreedly.on('errors', function(errors) {
+            errorDiv.innerHTML = errors.map(e => e.message).join("<br />");
+            show(errorDiv);
         });
 
         // Initialize the spreedly iframes

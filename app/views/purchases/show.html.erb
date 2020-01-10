@@ -1,0 +1,21 @@
+<% product = @purchase.product %>
+
+
+<h2>Product info</h2>
+
+<ul>
+    <li>Name: <%= product.name %> </li>
+    <li>Description: <%= product.description %></li>
+    <li>Cost: <%= product.formatted_price %></li>
+</ul>
+
+<h2>Purchase info</h2>
+
+<ul>
+    <li>Spreedly purchase token: <%= @purchase.token %> </li>
+    <li>Spreedly card token: <%= @purchase.card_token %></li>
+    <li>Card Type: <%= @purchase.card_type %></li>
+    <li>Last Four Digits: <%= @purchase.last_four %></li>
+</ul>
+
+<%= link_to "Home", root_path %>
