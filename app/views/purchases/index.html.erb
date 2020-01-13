@@ -1,0 +1,7 @@
+<div class="container">
+    <ul>
+        <% @purchases.each do |purchase| %>
+        <li><%= link_to "Purchase ##{purchase.id} at #{purchase.created_at}", purchase_path(purchase) %></li>
+        <% end %>
+    </ul>
+</div>

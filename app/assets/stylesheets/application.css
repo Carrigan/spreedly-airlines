@@ -14,16 +14,20 @@
  *= require_self
  */
 
-.headline {
-    margin: 0 20%;
+ :root {
+    --border-color: #bbb;
+  }
+
+.container {
+    padding: 0 20%;
 }
 
 .product-container {
-    margin: 1em 20%;
+    margin: 1em 0;
     display: flex;
     border-radius: 2em;
     padding: 2em;
-    border: 1px solid black;
+    border: 2px solid var(--border-color);
 }
 
 .product-price{
@@ -53,6 +57,31 @@ input[type=text] {
     padding: 0px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 2px solid var(--border-color);
     border-radius: 4px;
-  }
+}
+
+select {
+    height: 44px;
+	padding: 0px 20px;
+	box-sizing: border-box;
+	border: 2px solid var(--border-color);
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    border-radius: 4px;
+    appearance: none;
+}
+
+.navbar {
+    border-bottom: 2px solid black;
+    padding: 10px 20%;
+    display: flex;
+}
+
+.navbar-left {
+    font-size: 1.4em;
+}
+
+.navbar-right {
+    text-align: right;
+    flex-grow: 1;
+}

@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post "/products/:id/purchase", to: "products#purchase", as: "product_purchase"
 
   get "/purchases/:id", to: "purchases#show", as: "purchase"
+  get "/purchases", to: "purchases#index", as: "purchases"
 end
