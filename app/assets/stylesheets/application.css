@@ -85,3 +85,19 @@ select {
     text-align: right;
     flex-grow: 1;
 }
+
+.notice {
+    margin: 1em 20%;
+    border: 2px solid green;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.alert {
+    margin: 1em 20%;
+    border: 2px solid orange;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: center;
+}

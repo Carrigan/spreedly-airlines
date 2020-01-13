@@ -1,7 +1,7 @@
 <% product = @purchase.product %>
 
 <div class="container">
-    <h2>Product info</h2>
+    <h2>Product Info</h2>
 
     <ul>
         <li>Name: <%= product.name %> </li>
@@ -9,7 +9,7 @@
         <li>Cost: <%= product.formatted_price %></li>
     </ul>
 
-    <h2>Purchase info</h2>
+    <h2>Purchase Info</h2>
 
     <ul>
         <li>Spreedly purchase token: <%= @purchase.token %> </li>
@@ -17,4 +17,8 @@
         <li>Card Type: <%= @purchase.card_type %></li>
         <li>Last Four Digits: <%= @purchase.last_four %></li>
     </ul>
+
+    <h2>Debug Info</h2>
+
+    <%= @purchase_info.inspect %>
 </div>

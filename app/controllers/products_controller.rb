@@ -1,17 +1,15 @@
 class ProductsController < ApplicationController
+    before_action :set_product, only: [:cart, :purchase]
+    
     def index
         @products = Product.all
     end
 
     def cart
-        @product = Product.find(params.require(:id))
         @env_token = env_token
     end
 
     def purchase
-        @product = Product.find(params.require(:id))
-
-        purchase_service = PurchaseService.new(@product, params.require(:spreedly_token))
         purchase = purchase_service.run()
         
         if purchase.present?
@@ -23,6 +21,18 @@ class ProductsController < ApplicationController
             render :cart
         end
     end 
+
+    def purchase_service
+        @purchase_service ||= PurchaseService.new(
+            @product, 
+            params.require(:spreedly_token),
+            params[:deliver].nil?
+        )
+    end
+
+    def set_product
+        @product = Product.find(params.require(:id))
+    end
 
     def env_token
         Rails.application.credentials.spreedly[:env_key]
