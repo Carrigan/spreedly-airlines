@@ -24,8 +24,11 @@ window.addEventListener('load', () => {
         var formSubmit = document.getElementById(formSubmitName);
         const successDiv = document.getElementById(`${prefix}_success`);
         const errorDiv = document.getElementById(`${prefix}_errors`);
+        const formDiv = document.getElementById(`${prefix}_form`);
+        const tokenField = document.getElementById(`${prefix}_token`);
+        const changePaymentButton = document.getElementById(`${prefix}_change_pm`);
 
-        // Take over the button
+        // Take over the "Add Payment Info" button
         spreedlySubmit.onclick = function() {
             const fullNameElement = document.getElementById(`${prefix}_full_name`);
             const expMonthElement = document.getElementById(`${prefix}_exp_month`);
@@ -41,26 +44,54 @@ window.addEventListener('load', () => {
             return false;
         };
 
+        // Take over the "Change Payment Info" button
+        changePaymentButton.onclick = function() {
+            // Destroy the token
+            tokenField.setAttribute("value", "");
+            
+            // Update visibilities
+            hide(successDiv);
+            show(formDiv)
+
+            // Disable the submit button
+            formSubmit.disabled = true;
+
+            return false;
+        }
+
         // Initially hide the errors and successes
         hide(errorDiv);
         hide(successDiv);
 
         // Hook up the completion method
-        window.Spreedly.on('paymentMethod', function(token, pmData) {
-            // Hide the form div, show the success div with card info
+        function receivePaymentToken(token, pmData) {
+            // Hide the form div, show the success div
             show(successDiv);
-            hide(document.getElementById(`${prefix}_form`));
+            hide(formDiv);
             hide(errorDiv);
+
+            // Add the card info to the success div
             document.getElementById(`${prefix}_card_type`).innerHTML = pmData.card_type;
             document.getElementById(`${prefix}_card_truncated`).innerHTML = pmData.last_four_digits;
 
             // Fill in the token
-            var tokenField = document.getElementById(`${prefix}_token`);
             tokenField.setAttribute("value", token);
 
             // Enable the submit button
             formSubmit.disabled = false;
-        });
+        }
+
+        // Set the payment token on completion
+        window.Spreedly.on('paymentMethod', receivePaymentToken);
+
+        // Alternatively, set the payment method based on server data
+        var paymentMethodDiv = document.querySelector('div[data-control-type="spreedly-payment-method"]');
+        if (paymentMethodDiv) {
+            const cachedToken = paymentMethodDiv.dataset["token"];
+            const cardType = paymentMethodDiv.dataset["cardType"];
+            const lastFour = paymentMethodDiv.dataset["lastFour"];
+            receivePaymentToken(cachedToken, { card_type: cardType, last_four_digits: lastFour });
+        }
 
         // Display errors
         Spreedly.on('errors', function(errors) {
@@ -73,7 +104,7 @@ window.addEventListener('load', () => {
         const cvvElement = `${prefix}_cvv`;
         window.Spreedly.init(envToken, { "numberEl": numberElement, "cvvEl": cvvElement });
 
-        // When ready, reenable the submit buttton
+        // When ready, reenable the submit button and change the styling.
         window.Spreedly.on("ready", function () {
             spreedlySubmit.disabled = false;
 

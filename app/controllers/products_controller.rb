@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
 
     def cart
         @env_token = env_token
+        @payment_method = PaymentMethodCache.instance.get_cached_method
     end
 
     def purchase
@@ -26,7 +27,8 @@ class ProductsController < ApplicationController
         @purchase_service ||= PurchaseService.new(
             @product, 
             params.require(:spreedly_token),
-            params[:deliver].nil?
+            params[:deliver].nil?,
+            params[:save_card].present?
         )
     end
 

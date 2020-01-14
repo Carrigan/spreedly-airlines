@@ -7,4 +7,13 @@ module ApplicationHelper
             form_submit: form_submit
         })
     end
+
+    def spreedly_cached_payment_method(token, card_type, last_four) 
+        tag("div", data: {
+            control_type: "spreedly-payment-method",
+            token: token,
+            card_type: card_type,
+            last_four: last_four
+        })
+    end
 end

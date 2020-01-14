@@ -14,7 +14,9 @@
         </div>
 
         <div id="spreedly_success">
-            You are using the <span id="spreedly_card_type"></span> card ending in <span id="spreedly_card_truncated"></span>.
+            <p>You are using the <span id="spreedly_card_type"></span> card ending in <span id="spreedly_card_truncated"></span>.</p>
+
+            <%= button_tag("Change payment method", id: "spreedly_change_pm") %>
         </div>
 
         <div id="spreedly_form">
@@ -40,7 +42,7 @@
             <div class="form-group">
                 <label>CVV</label>
                 <div id="spreedly_cvv" style="height: 56px;"></div>
-            </div>
+            </div>        
 
             <%= button_tag("Add Payment Info", id: "spreedly_submit", disabled: true) %>
         </div>
@@ -52,8 +54,21 @@
             <%= label_tag(:deliver, "Checkout with Trusted Partner (PMD)") %>
         </div>
 
+        <div class="form-group">
+            <%= check_box_tag "save_card", "yes" %>
+            <%= label_tag(:save_card, "Save my credit card for future transactions") %>
+        </div>
+
         <%= submit_tag("Submit Order", id: "airlines-submit", disabled: true) %>
     <% end %>
 </div>
 
-<%= spreedly_iframe_initializer(@env_token, "spreedly", "airlines-submit") %>
+<%= spreedly_iframe_initializer(@env_token, "spreedly", "airlines-submit") do %><% end %>
+
+<% if @payment_method %>
+    <%= spreedly_cached_payment_method(
+        @payment_method.token, 
+        @payment_method.card_type, 
+        @payment_method.last_four_digits
+    ) do %><% end %>
+<% end %>
