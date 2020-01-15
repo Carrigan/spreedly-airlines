@@ -60,8 +60,8 @@ class PurchaseService
         env.deliver_to_receiver(
             receiver_token, 
             @payment_method_token, 
-            headers: deliver_headers, 
-            url: deliver_url, 
+            headers: deliver_headers,
+            url: deliver_url,
             body: deliver_body
         )
     end
@@ -78,9 +78,9 @@ class PurchaseService
 
     def deliver_body
         {
-            "product_id": @product.id,
-            "product_price": @product.price,
-            "card_number": "{{credit_card_number}}"
+            product_id: @product.id,
+            product_price: @product.price,
+            card_number: "{{credit_card_number}}"
         }.to_json
     end
 
