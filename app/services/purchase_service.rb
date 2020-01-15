@@ -9,7 +9,7 @@ class PurchaseService
     def run
         # If payment caching was used, this could be disabled, but we are not using a model here
         # so just verify every time.
-        return if !verify
+        return if @save_card && !verify
 
         @transaction = @process_locally ? transact : deliver
         PaymentMethodCache.instance.set_cached_method(@transaction.payment_method) if @save_card
