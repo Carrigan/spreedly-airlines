@@ -1,7 +1,35 @@
-<div class="container">
-    <ul>
-        <% @purchases.each do |purchase| %>
-        <li><%= link_to "Purchase ##{purchase.id} at #{purchase.created_at}", purchase_path(purchase) %></li>
-        <% end %>
-    </ul>
+<div class="flex flex-col items-center justify-center bg-gray-200 p-8 mb-8">
+    <div class="flex items-center justify-center">
+        <h1>Order History</h1>
+    </div>
+
+    <div class="container py-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper dapibus imperdiet. Etiam euismod libero a ultricies lobortis. Vestibulum eu odio mattis, dignissim turpis vitae, suscipit tellus. Cras facilisis consequat libero at imperdiet. Pellentesque felis turpis, feugiat eu eleifend vel, lobortis in neque. Pellentesque tincidunt, nisi convallis rutrum dictum, eros justo laoreet sem, sit amet lobortis libero est vitae orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce nec ultrices nisi. Phasellus ac dictum nulla, sit amet tempus nibh. Morbi ultrices dictum tortor quis malesuada. Nam in lobortis orci. Aliquam porta sodales consequat.
+    </div>
+</div>
+
+<div class="container mx-auto">
+
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Order Description</th>
+                <th>Order Price</th>
+                <th>Ordered At</th>
+                <th></th>
+        </thead>
+
+        <tbody>
+            <% @purchases.each do |purchase| %>
+            <tr>
+                <td class="border border-gray-400 px-4 py-2"><%= purchase.id %></td>
+                <td class="border border-gray-400 px-4 py-2"><%= purchase.product.name %></td>
+                <td class="border border-gray-400 px-4 py-2"><%= purchase.product.formatted_price %></td>
+                <td class="border border-gray-400 px-4 py-2"><%= purchase.created_at %></td>
+                <td class="border border-gray-400 px-4 py-2"><%= link_to "View Details", purchase_path(purchase), class: "block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-md text-center" %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

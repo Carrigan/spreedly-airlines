@@ -1,6 +1,6 @@
 require("@rails/activestorage").start()
 require("channels")
-
+import './stylesheets'
 
 function hide(element) {
     element.style.display = "none";
@@ -12,7 +12,7 @@ function show(element) {
 
 window.addEventListener('load', () => {
     var initializerDiv = document.querySelector('div[data-control-type="spreedly-iframe-initializer"]');
-    
+
     if(initializerDiv) {
         // Grab the data on the div: the token and the prefix
         const prefix = initializerDiv.dataset["prefix"];
@@ -39,7 +39,7 @@ window.addEventListener('load', () => {
                 month: expMonthElement.value,
                 year: expYearElement.value
             };
-          
+
             window.Spreedly.tokenizeCreditCard(requiredFields);
             return false;
         };
@@ -48,7 +48,7 @@ window.addEventListener('load', () => {
         changePaymentButton.onclick = function() {
             // Destroy the token
             tokenField.setAttribute("value", "");
-            
+
             // Update visibilities
             hide(successDiv);
             show(formDiv)

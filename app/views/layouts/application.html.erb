@@ -5,20 +5,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'stylesheets' %>
     <%= javascript_pack_tag 'application' %>
     <script src="https://core.spreedly.com/iframe/iframe-v1.min.js"></script>
   </head>
 
   <body>
-    <div class="navbar">
-      <div class="navbar-left">
-        Spreedly Airlines - Carrigan Edition
-      </div>
-      
-      <div class="navbar-right">
-        <%= link_to "Home", root_path %> -
-        <%= link_to "Order History", purchases_path %>
+    <div class="bg-blue-700 p-4 text-white flex justify-center">
+      <div class="container flex items-center">
+        <div class="flex flex-col items-center">
+          <p class="text-xl leading-none">Spreedly Airlines</p>
+          <span class="text-sm italic tracking-tight leading-none">Carrigan Edition</span>
+        </div>
+
+        <div class="ml-8 text-gray-200 text-sm">
+          <%= link_to "Home", root_path %>
+          <%= link_to "Order History", purchases_path, class: "ml-2" %>
+        </div>
       </div>
     </div>
 

@@ -1,22 +1,27 @@
-<div class="container">
-    <div class="headline">
+<div class="flex flex-col items-center justify-center bg-gray-200 p-8 mb-8">
+    <div class="flex items-center justify-center">
         <h1>Flight Sale</h1>
     </div>
 
-    <% @products.each do |product| %>
-        <div class="product-container">
-            <div class="product-left">
-                <div class="product-name"><h3><%= product.name %></h3></div>
-                <div class="product-description"><%= product.description %></div>
+    <div class="container py-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper dapibus imperdiet. Etiam euismod libero a ultricies lobortis. Vestibulum eu odio mattis, dignissim turpis vitae, suscipit tellus. Cras facilisis consequat libero at imperdiet. Pellentesque felis turpis, feugiat eu eleifend vel, lobortis in neque. Pellentesque tincidunt, nisi convallis rutrum dictum, eros justo laoreet sem, sit amet lobortis libero est vitae orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce nec ultrices nisi. Phasellus ac dictum nulla, sit amet tempus nibh. Morbi ultrices dictum tortor quis malesuada. Nam in lobortis orci. Aliquam porta sodales consequat.
+    </div>
+</div>
+
+<% @products.each do |product| %>
+    <div class="container mx-auto mb-4">
+        <div class="flex justify-between items-center border border-gray-500 rounded-md shadow-md h-32">
+            <%= image_tag("skyline.jpg", class: "h-full rounded-sm") %>
+
+            <div class="ml-8 flex-grow">
+                <div class="text-lg"><h3><%= product.name %></h3></div>
+                <div class="text-sm text-gray-800"><%= product.description %></div>
             </div>
 
-            <div class="product-price">
-                <%= product.formatted_price %>
-            </div>
-
-            <div class="product-buy">
-                <%= link_to "Buy now", product_cart_path(product) %>
+            <div class="p-6">
+                <div class="text-center p-2"><%= product.formatted_price %></div>
+                <div><%= link_to "Buy now", product_cart_path(product), class: "block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md" %></div>
             </div>
         </div>
-    <% end %>
-</div>
+    </div>
+<% end %>
